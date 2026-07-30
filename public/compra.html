@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cineplex — Comprar Ingresso</title>
+    <meta name="description" content="Selecione sua poltrona e finalize a compra do seu ingresso de cinema.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+            Cineplex
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="filmes.html">Em Cartaz</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div id="loader" class="loader"></div>
+        <div class="compra-container" id="compra-container" style="display: none;">
+            
+            <div class="detalhes-filme-lateral" id="detalhes-filme">
+                <!-- Detalhes do filme injetados aqui -->
+            </div>
+
+            <div class="form-compra">
+                <h2>Selecione sua poltrona</h2>
+                <div class="mapa-assentos">
+                    <div class="tela-cinema"></div>
+                    <div id="grid-assentos" style="display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 28px;"></div>
+                </div>
+
+                <div class="legenda-assentos">
+                    <div class="legenda-item"><div class="legenda-dot livre"></div> Disponível</div>
+                    <div class="legenda-item"><div class="legenda-dot ocupado"></div> Ocupado</div>
+                    <div class="legenda-item"><div class="legenda-dot selecionado"></div> Selecionado</div>
+                </div>
+
+                <h2>Seus dados</h2>
+                <form id="form-compra-ingresso">
+                    <div class="form-group">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" required placeholder="Digite seu nome completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" required placeholder="000.000.000-00" maxlength="14">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo">Tipo de ingresso</label>
+                        <select id="tipo" required>
+                            <option value="Inteira">Inteira</option>
+                            <option value="Estudante">Estudante (Meia-entrada)</option>
+                        </select>
+                    </div>
+
+                    <div class="resumo-valores">
+                        <p><span>Preço original</span> <span id="preco-original">R$ 0,00</span></p>
+                        <p><span>Desconto</span> <span id="desconto">R$ 0,00</span></p>
+                        <p class="total"><span>Valor final</span> <span id="valor-final">R$ 0,00</span></p>
+                    </div>
+
+                    <button type="button" class="btn" id="btn-revisar" style="width: 100%;">Revisar e comprar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal-overlay" id="modal-confirmacao">
+        <div class="modal">
+            <h2>Confirmar compra</h2>
+            <div class="modal-details">
+                <p><strong>Filme:</strong> <span id="modal-filme"></span></p>
+                <p><strong>Horário:</strong> <span id="modal-horario"></span></p>
+                <p><strong>Assento:</strong> <span id="modal-assento"></span></p>
+                <p><strong>Nome:</strong> <span id="modal-nome"></span></p>
+                <p><strong>Tipo:</strong> <span id="modal-tipo"></span></p>
+                <p><strong>Valor:</strong> <span id="modal-valor"></span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+                <button class="btn" id="btn-confirmar">Confirmar compra</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Cineplex. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/compra.js"></script>
+</body>
+</html>

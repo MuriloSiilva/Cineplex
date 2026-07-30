@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cineplex — Filmes em Cartaz</title>
+    <meta name="description" content="Confira os filmes em cartaz no Cineplex e garanta seu ingresso online agora mesmo.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+            Cineplex
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="filmes.html">Em Cartaz</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div class="section-header">
+            <span class="section-tag">🎬 Em Cartaz</span>
+            <h1 class="section-title">Escolha seu filme</h1>
+            <p class="section-subtitle">Selecione um dos títulos abaixo para garantir seu ingresso agora mesmo.</p>
+        </div>
+        <div id="loader" class="loader"></div>
+        <div id="filmes-grid" class="filmes-grid"></div>
+    </main>
+
+    <footer>
+        <p>© 2026 Cineplex. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/filmes.js"></script>
+</body>
+</html>

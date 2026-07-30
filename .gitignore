@@ -1,0 +1,18 @@
+# Dependências
+node_modules/
+
+# Banco de dados
+database.db
+
+# Variáveis de ambiente
+.env
+
+# Arquivos temporários
+*.log
+download_images.js
+update_images.js
+test.jpg
+
+# OS
+Thumbs.db
+.DS_Store

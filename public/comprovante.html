@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cineplex — Comprovante de Compra</title>
+    <meta name="description" content="Comprovante de compra do seu ingresso de cinema.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+            Cineplex
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="filmes.html">Em Cartaz</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div id="loader" class="loader"></div>
+        <div class="comprovante-container" id="comprovante-content" style="display: none;">
+            <div class="comprovante-header">
+                <h1>Cineplex</h1>
+                <h2>Comprovante de Compra</h2>
+            </div>
+            
+            <div class="comprovante-detalhes" id="detalhes-comprovante"></div>
+
+            <div style="text-align: center; margin-top: 36px; padding-top: 24px; border-top: 1px dashed var(--color-border);">
+                <p style="font-size: 1rem; color: var(--color-text-primary); margin-bottom: 4px;">Obrigado pela preferência! 🎬</p>
+                <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 28px;">Uma cópia deste comprovante foi enviada para o seu e-mail.</p>
+                <a href="filmes.html" class="btn btn-secondary">Ver outros filmes</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Cineplex. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const compraId = urlParams.get('id');
+
+            if (!compraId) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/comprovante/${compraId}`);
+                if (!res.ok) throw new Error('Comprovante não encontrado');
+                const data = await res.json();
+
+                document.getElementById('detalhes-comprovante').innerHTML = `
+                    <p><span>Cliente</span> <span class="valor">${data.cliente_nome}</span></p>
+                    <p><span>Filme</span> <span class="valor">${data.filme_titulo}</span></p>
+                    <p><span>Horário</span> <span class="valor">${data.filme_horario}</span></p>
+                    <p><span>Assento</span> <span class="valor">${data.assento}</span></p>
+                    <p><span>Tipo</span> <span class="valor">${data.tipo}</span></p>
+                    <p><span>Valor</span> <span class="valor">R$ ${data.valor.toFixed(2).replace('.', ',')}</span></p>
+                    <p><span>Data</span> <span class="valor">${data.data}</span></p>
+                `;
+
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('comprovante-content').style.display = 'block';
+                document.getElementById('comprovante-content').style.animation = 'fadeInUp 0.6s var(--ease-out-expo) both';
+
+            } catch (error) {
+                alert('Erro ao carregar o comprovante.');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
